@@ -18,6 +18,7 @@
 
 我的瀏覽器 (Client) ，先詢問 DNS 得到 Google 的 IP 8.8.8.8，接著發 request 到 8.8.8.8到 Google 的 Server ，Server 於是查詢了它的 Database 後回應 (response) 給我的瀏覽器一系列的查詢結果。
 
+前兩題好讀版：https://tripxbook.com/100days-learn-to-do/frontend-developer-day7/
 
 
 ## 請列舉出 3 個「課程沒有提到」的 command line 指令並且說明功用
