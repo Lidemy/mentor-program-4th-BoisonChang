@@ -11,7 +11,7 @@ request.get(
       console.log(exception); // 錯誤處理
     }
     if (content.message === 'Not Found') {
-      console.log('找不到國家資訊');
+      console.log(' 找不到國家資訊 ');
       return;
     }
     for (let i = 0; i <= content.length - 1; i += 1) {
