@@ -4,7 +4,12 @@ const process = require('process');
 request.get(
   'https://lidemy-book-store.herokuapp.com/books/',
   (error, response, body) => {
-    const content = JSON.parse(body);
+    let content;
+    try {
+      content = JSON.parse(body);
+    } catch (exception) {
+      console.log(exception); // 錯誤處理
+    }
     if (process.argv[2] === 'list') {
       for (let i = 0; i <= content.length - 1; i += 1) {
         console.log(`${content[i].id} ${content[i].name}`);

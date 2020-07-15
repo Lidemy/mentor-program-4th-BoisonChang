@@ -4,7 +4,12 @@ const process = require('process');
 request.get(
   `https://restcountries.eu/rest/v2/name/'${process.argv[2]}`,
   (error, response, body) => {
-    const content = JSON.parse(body);
+    let content;
+    try {
+      content = JSON.parse(body);
+    } catch (exception) {
+      console.log(exception); // 錯誤處理
+    }
     if (content.message === 'Not Found') {
       console.log('找不到國家資訊');
       return;
