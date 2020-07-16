@@ -2,7 +2,7 @@ const request = require('request');
 const process = require('process');
 
 request.get(
-  `https://restcountries.eu/rest/v2/name/'${process.argv[2]}`,
+  `https://restcountries.eu/rest/v2/name/${process.argv[2]}`,
   (error, response, body) => {
     let content;
     try {
@@ -10,10 +10,13 @@ request.get(
     } catch (exception) {
       console.log(exception); // 錯誤處理
     }
-    if (content.message === 'Not Found') {
+    if (!(response.statusCode >= 200 && response.statusCode < 300)) {
       console.log(' 找不到國家資訊 ');
       return;
     }
+
+    console.log(content);
+
     for (let i = 0; i <= content.length - 1; i += 1) {
       console.log('============');
       console.log(`國家：${content[i].name ? content[i].name : '無資料'}`);
