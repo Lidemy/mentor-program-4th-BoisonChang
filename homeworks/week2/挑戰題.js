@@ -1,3 +1,4 @@
+/* eslint-disable */
 function search(arr, n) {
 	var minIndex = 0
 	var maxIndex = arr.length-1

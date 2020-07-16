@@ -1,3 +1,4 @@
+/* eslint-disable */
 function capitalize(str) {
 	var SaveFirst=''
 

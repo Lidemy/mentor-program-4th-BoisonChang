@@ -1,3 +1,4 @@
+/* eslint-disable */
 ``` js
 function isValid(arr) {
   for(var i=0; i<arr.length; i++) {
