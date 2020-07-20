@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./homeworks/**/*.js",
+    "jest": "jest",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "husky": {
@@ -28,6 +29,7 @@
   },
   "homepage": "https://github.com/Lidemy/mentor-program-4th#readme",
   "dependencies": {
+    "jest": "^26.1.0",
     "mailgun-js": "^0.22.0",
     "request": "^2.88.2"
   },
