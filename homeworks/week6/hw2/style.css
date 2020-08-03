@@ -1,0 +1,144 @@
+.decoration {
+	background: #fad312;
+	height: 8px;
+}
+
+.wrapper {
+  width: 645px;
+  margin: 0 auto;
+  padding: 0;
+  box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+.title {
+	margin-left: 42px;
+}
+
+.title__name {
+	display: inline-flex;
+	margin-top: 54px;
+	font-family: MicrosoftJhengHei;
+  	font-size: 36px;
+ 	font-weight: bold;
+ 	letter-spacing: -1.8px;
+}
+
+.title__info {
+	font-family: MicrosoftJhengHei;
+	font-size: 14px;
+	line-height: 24px;
+	margin-bottom: 20px;
+}
+
+.title__attention {
+	font-family: MicrosoftJhengHei;
+  	font-size: 16px;
+  	color: #e74149;
+}
+
+.questions {
+	margin-top: 50px;
+	margin-left: 42px;
+}
+
+.question__title {
+	margin-bottom: 18px;
+	display: flex;
+	font-size: 20px;
+}
+
+.question__title::after {
+	content: "*";
+	margin-left: 5px;
+	font-family: MicrosoftJhengHei;
+	font-size: 16px;
+	color: #e74149;
+}
+
+.question__answer {
+	margin-bottom: 49px;
+	width: 287px;
+	height: 23px;
+	border: solid 1px #d0d0d0;
+	color: #afafaf;
+	font-family: MicrosoftJhengHei;
+	padding:  5px 0px 3px 1px;
+}
+
+.question__answer::placeholder {
+	color: #d0d0d0;
+}
+
+.P2 {
+	margin-top: 18px;
+	margin-bottom: 49px;
+}
+
+.question__title__choice {
+	font-family: MicrosoftJhengHei;
+	font-size: 14px;
+}
+
+.question__title__last {
+	margin-bottom: 12px;
+	font-size: 20px;
+}
+
+.question__title__last＿ps {
+	margin-bottom: 18px;
+	font-family: MicrosoftJhengHei;
+	font-size: 14px;
+}
+
+.question__submit__button {
+	display: inline-flex;
+	padding: 13px 31px 13px 31px;
+	font-size: 15px;
+	background: #fad312;
+	border-radius: 3px;
+	margin-bottom: 21px;
+}
+
+
+.question__submit__button:hover {
+  background: #ff7286;
+}
+
+.question__submit__button:hover div {
+  color: White;
+}
+
+
+.question__submit__desc {
+	display: block;
+	font-family: MicrosoftJhengHei;
+  	font-size: 14px;
+  	padding-bottom: 35px;
+  	margin-bottom: 35px;
+}
+
+
+footer {
+	background: #000000;	
+}
+
+.footer__desc {
+	text-align: center;
+	color: #999999;
+	display: block;
+	font-size: 13px;
+	font-family: MicrosoftJhengHei;
+    padding: 24px 12px;
+}
+
+
+
+@media(max-width: 660px){
+	.wrapper {
+ 		width: 391px;
+	}
+
+
+}
+
