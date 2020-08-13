@@ -1,0 +1,114 @@
+.decoration {
+	background: #4A90E2;;
+	height: 8px;
+}
+
+.wrapper {
+  width: 645px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+  box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+.wrapper__inner {
+  width: 400px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+
+
+.tdi__item {
+	margin: 0;
+	padding: 0;
+}
+
+
+.title__name {
+	margin-top: 54px;
+	font-family: MicrosoftJhengHei;
+  	font-size: 60px;
+ 	font-weight: bold;
+ 	letter-spacing: -1.8px;
+ 	text-align: center;
+}
+
+.title__info {
+	font-family: MicrosoftJhengHei;
+	font-size: 24px;
+	line-height: 24px;
+	margin-bottom: 20px;
+	letter-spacing: 1.5px; 
+	text-align: center;
+}
+
+
+.input {
+	margin: 50px 0px 50px 0px;
+	text-align: center;
+	width: 100%;
+}
+
+input[type="text"]::placeholder {  
+	text-align: center; 
+} 
+
+.todo__name {
+	width: 400px;
+	border: solid 1px #d0d0d0;
+	color: #000000;
+	font-size: 25px;
+	font-family: MicrosoftJhengHei;
+	padding:  5px 0px 3px 1px;
+	text-align: center;
+}
+
+.todo__new {
+	color: blue;
+	font-size: 25px;
+	font-family: MicrosoftJhengHei;
+	margin-bottom: 40px;
+	margin-left: 150px;
+}
+
+.todolists {
+	width: 400px;
+
+}
+
+.todolist__row {
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+span {
+	margin: 0;
+}
+
+.todolist__row + .todolist__row {
+	margin-top: 30px;
+}
+
+
+.todolist {
+	display: inline-block;
+}
+
+.todolist__done {
+	text-decoration:line-through;
+	color: #D3D3D3;
+}
+
+
+.todolist + .todolist {
+	margin-left: 30px;
+}
+
+.tdi__btns {
+	position: absolute;
+	right: 0px;
+}
+
+
