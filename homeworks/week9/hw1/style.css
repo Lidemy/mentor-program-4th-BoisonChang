@@ -1,0 +1,105 @@
+h1 {
+	margin: 0 auto;
+	background: #470024;
+	color: white;
+	font-size: 20px;
+	text-align: center;
+	padding: 20px;
+}
+
+.board {
+	width: 700px;
+	margin: 30px auto;
+	background: white;
+	padding: 15px;
+	border: solid 2px #dcdcdc;
+}
+
+.board__title {
+	margin-bottom: 50px;
+}
+
+.board__btn {
+	text-decoration: none;
+	color: black;
+	background: white;
+	font-size: 20px;
+	border: solid 2px #000000;
+	padding: 10px;
+	display: inline-block;
+}
+
+.board__btn ~ .board__btn {
+	margin-left: 15px;
+}
+
+.board__nickname {
+	font-size: 15px;
+	color: black;
+	margin-bottom: 20px;
+}
+
+.board__new-comment textarea {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.board__btn-submit {
+	text-decoration: none;
+	color: black;
+	background: white;
+	font-size: 20px;
+	border: solid 2px #000000;
+	padding: 10px;
+	margin-top: 10px;
+	display: flex;
+	cursor: pointer; 
+}
+
+.board__line {
+	width: 475px;
+	margin: 0 auto;
+	border: solid 1px #dcdcdc; 
+}
+
+.comment {
+	padding-top: 20px; 
+	display: flex;
+}
+
+.comment__avatar {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background: blue; 
+	min-width: 50px;
+}
+
+.comment__body {
+	margin-left: 30px;
+}
+
+.comment__author {
+	font-size: 20px;
+	margin-bottom: 0;
+	display: inline-block;
+	color: #2f4f4f;
+}
+
+
+.comment__content {
+	font-size: 15px;
+	margin-top: 10px; 
+	word-break: break-word;
+	white-space: pre-line;
+}
+
+.comment__time {
+	font-size: 15px;
+	color: #dcdcdc;
+	margin-left: 10px;
+}
+
+.error {
+	color: red;
+}
