@@ -1,0 +1,144 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <title>Week12 留言板</title>
+  <link rel="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <style> 
+    .card {
+    	margin-top: 12px;
+    }
+
+    .comments {
+    	margin-bottom: 12px;
+    }
+
+    .btn-more {
+    	margin-bottom: 20px;
+    }
+
+    .hide {
+    	display: none;
+    }
+
+  </style>
+  <script>
+  	function escape(toOutput){
+      return toOutput.replace(/\&/g, '&amp;')
+        .replace(/\</g, '&lt;')
+        .replace(/\>/g, '&gt;')
+        .replace(/\"/g, '&quot;')
+        .replace(/\'/g, '&#x27')
+        .replace(/\//g, '&#x2F');
+	}
+
+  	function appendCommentToDOM(container, comment){
+  	container.append(`
+		<div class="card">
+		  <div class="card-body">
+		    <h5 class="card-title">${escape(comment.nickname)}</h5>
+		    <p class="card-text">${escape(comment.content)}</p>
+		  </div>
+  		`);
+	}
+
+  	function appendMoreCommentToDOM(container){
+  	container.append(`
+  		<button type="submit" class="btn btn-primary btn-more">載入更多</button>`);
+	}
+
+  	function displayAllComment(num, DOM, moreDOM){
+		$.ajax({
+		  url: `http://mentor-program.co/mtr04group1/BoisonChang/week12/board-api/api_comment.php
+?site_key=boison&comment_num_display=${num}`
+		}).done(function(data) {
+		  if(!data) {
+		  	alert(data.message);
+		  	return;
+		  }
+		  const comments = data.discussions;
+		  let commentNum = 1;
+		  for(let comment of comments) {
+		  	appendCommentToDOM(DOM, comment);
+		  	commentNum += 1;
+		  };
+		    if(commentNum >= 5 && $('.btn-more').html() == "") {
+		      appendMoreCommentToDOM(moreDOM);
+		    }
+
+		    if(data.moreornot) {
+		      $('.btn-more').remove();
+		    }			  
+	    })
+	}
+
+  	$(document).ready(() => {
+  		const commentDOM = $('.comments');
+  		const commentMore = $('.btn-more');
+  		let comment_num_display = 5;
+  		let multiple = 2;
+
+		displayAllComment(comment_num_display, commentDOM, commentMore);
+
+		$('.btn-more').submit( e => {
+		  e.preventDefault();
+		  let comment_num_display = 5;
+		  $('.comments').empty();               // 除了清空原本的以外，有沒有更好的辦法讓頁面更流暢呢？
+		  comment_num_display *= multiple;
+		  displayAllComment(comment_num_display, commentDOM, commentMore);
+		  multiple += 1;
+		})
+
+		$('.add-comment-form').submit( e => {
+		  	e.preventDefault();
+		  	const newCommentData = {
+			  	'site_key': 'boison',
+			  	'nickname': $('input[name=nickname]').val(),
+			  	'content':  $('textarea[name=content]').val()
+		  	}
+		  	$.ajax({
+			  'type': 'POST',
+			  'url': 'http://mentor-program.co/mtr04group1/BoisonChang/week12/board-api/api_add_comment.php',
+			  'data': newCommentData
+			}).done(function(data) {
+			  console.log(data);				
+		  	  if (!data) {
+		  	  	alert(data);
+		  	  	return;
+		  	  }
+			})
+			location.reload()
+		})
+	});
+
+  </script>
+
+
+</head>
+<body>
+	<div class="container">
+		<form class="add-comment-form">
+		  	<div class="form-group">
+		  		<label form="form-nickname">暱稱</label>
+		  		<input name="nickname" type="text" class="form-control" id="form-nickname">
+		  	</div>
+		  	<div class="form-group">
+			    <label for="content-textarea">留言內容</label>
+			    <textarea name="content" class="form-control" id="content-textarea" rows="3"></textarea>
+		    </div>
+		    <button type="submit" class="btn btn-primary">送出</button>
+		</form>
+		<div class="comments">
+		</div>
+		<div>
+		  <form class="btn-more"></form>
+		</div>
+	</div>
+</body>
+</html>
