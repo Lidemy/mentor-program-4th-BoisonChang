@@ -81,8 +81,12 @@
 	  $('.list-group-body').on('click', '.btn-unfinished', e => {
 	  	let button_finished_html = `<button type="button" class="btn btn-success btn-finished">標記已完成</button>`;
 	  	let badge_unfinished_html = `<span class="badge badge-secondary mr-3 badge-unfinished">未完成</span>`;
-	  	 anchor = $(e.target.closest('.list-group-item')).attr('id-value')
-	  	 todolists[anchor].status = 'unfinshed';		  	
+	  	$(e.target.closest('.list-group-item')).find('.list-badge').prepend(badge_unfinished_html);  	
+		$(e.target.closest('div')).prepend(button_finished_html);
+	  	 anchor = $(e.target.closest('.list-group-item')).attr('id-value');
+	  	 todolists[anchor].status = 'unfinshed';
+	  	 $(e.target.closest('.list-group-item')).find('.badge-finished').remove();
+	  	 $(e.target).remove();	  	
 	  });
 
 	  $('.list-group-body').on('click', '.btn-finished', e => {
@@ -96,6 +100,7 @@
 	  	 $(e.target.closest('.list-group-item')).find('.badge-unfinished').remove();
 	  	 $(e.target).remove();
 	  });
+
 
 	  $('.list-group').on('click', '.clear-finished', e => {
 		for(let todoitem of todolists) {
