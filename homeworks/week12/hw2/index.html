@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+  <title>TO DO LIST</title>
+
+</head>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+ <script type="text/javascript">
+ 	function escape(toOutput){
+      return toOutput.replace(/\&/g, '&amp;')
+        .replace(/\</g, '&lt;')
+        .replace(/\>/g, '&gt;')
+        .replace(/\"/g, '&quot;')
+        .replace(/\'/g, '&#x27')
+        .replace(/\//g, '&#x2F');
+	}
+
+  	$(document).ready(function() {
+  	  var idValue = 0;
+  	  var anchor = 0;
+  	  var todolists = [];
+  	  var todoSaveornot = 0;
+  	  const todoDOM = $('.list-group-body');
+
+  	  function isNull( str ){
+	    if ( str == "" ) return true;
+        var regu = "^[ ] $";
+        var re = new RegExp(regu);
+        return re.test(str);
+      }
+
+	  $('.btn-add').click( e => {
+	  	let value = $('.todo-input').val();
+	  	if(!isNull(value)) {
+	  	  let inputhtml = `<li class="list-group-item  d-flex justify-content-between align-items-center
+	  	  " id-value="${idValue}">
+			      <div class="list-badge d-flex align-items-center">
+	                <span class="badge badge-secondary badge-unfinished mr-3">未完成</span>
+			        <span class="text-value  border border-info p-2" href="#" role="button">${value}</span>
+			      </div>
+			      <div>
+			  	    <button type="button" class="btn btn-success btn-finished">標記已完成</button>
+			  	    <button type="button" class="btn btn-danger delete-todo">刪除</button>
+			      </div>
+			    </li>`;
+	  	  $('.list-group-body').prepend(inputhtml);
+	  	  $('.todo-input').val("");
+	  	  todolists[idValue] = {
+	        'id': idValue,
+	        'status': 'unfinshed',
+	        'content': value,
+	        'isdeleted': 0
+	  	  }
+	  	  idValue += 1;
+        } else {
+        	alert('請輸入待辦事項')
+        }
+	  });
+
+	  $('.list-group-body').on('click', '.delete-todo', e => {
+	  	 anchor = $(e.target.closest('.list-group-item')).attr('id-value');
+	  	 todolists[anchor].isdeleted = 1;
+		$(e.target.closest('.list-group-item')).remove();
+	  })
+
+
+
+	  $('.list-group-body').on('click', '.btn-unfinished', e => {
+	  	let button_finished_html = `<button type="button" class="btn btn-success btn-finished">標記已完成</button>`;
+	  	let badge_unfinished_html = `<span class="badge badge-secondary mr-3 badge-unfinished">未完成</span>`;
+	  	$(e.target.closest('.list-group-item')).find('.list-badge').prepend(badge_unfinished_html);  	
+		$(e.target.closest('div')).prepend(button_finished_html);
+	  	 anchor = $(e.target.closest('.list-group-item')).attr('id-value');
+	  	 todolists[anchor].status = 'unfinshed';
+	  	 $(e.target.closest('.list-group-item')).find('.badge-finished').remove();
+	  	 $(e.target).remove();	  	
+	  });
+
+	  $('.list-group-body').on('click', '.btn-finished', e => {
+	  	console.log(todolists);
+	  	let button_unfinished_html = `<button type="button" class="btn btn-warning btn-unfinished">標記未完成</button>`;
+	  	let badge_finished_html = `<span class="badge badge-primary mr-3 badge-finished">已完成</span>`;
+	  	$(e.target.closest('.list-group-item')).find('.list-badge').prepend(badge_finished_html);  	
+		$(e.target.closest('div')).prepend(button_unfinished_html);
+	  	 anchor = $(e.target.closest('.list-group-item')).attr('id-value');
+	  	 todolists[anchor].status = 'finshed';
+	  	 $(e.target.closest('.list-group-item')).find('.badge-unfinished').remove();
+	  	 $(e.target).remove();
+	  });
+
+
+	  $('.list-group').on('click', '.clear-finished', e => {
+		for(let todoitem of todolists) {
+		  if(todoitem.status == 'finshed'){
+		    todoitem.isdeleted = 1;
+		    console.log(todoitem);	
+		  }
+		}
+	  	$('.badge-finished').closest('.list-group-item').remove();
+	  	console.log(todolists);	
+	  });
+
+	  $('.filter-finished').click( e => {
+	  	if($('.badge-finished').closest('.list-group-item').hasClass('hide')) {
+ 		  $('.badge-finished').closest('.list-group-item').removeClass('hide');
+	  	}
+        $('.badge-unfinished').closest('.list-group-item').addClass('hide');
+	  });
+
+	  $('.filter-unfinished').click( e => {
+	  	if($('.badge-unfinished').closest('.list-group-item').hasClass('hide')) {
+ 		  $('.badge-unfinished').closest('.list-group-item').removeClass('hide');
+	  	}
+        $('.badge-finished').closest('.list-group-item').addClass('hide');
+	  });
+
+	  $('.filter-all').click( e => {
+	  	if($('.badge-unfinished').closest('.list-group-item').hasClass('hide')) {
+ 		  $('.badge-unfinished').closest('.list-group-item').removeClass('hide');
+	  	}  
+	  	if($('.badge-finished').closest('.list-group-item').hasClass('hide')) {
+ 		  $('.badge-finished').closest('.list-group-item').removeClass('hide');
+	  	}   
+	  });
+
+	  $('.list-group-body').on('click', '.text-value', e => {
+	  	textValue = $(e.target).text();
+	  	$(e.target).prop(`outerHTML`, `<textarea rows="1" class="text-value-input" type="text">${textValue}</textarea>`);
+	    });
+
+	  	$('.list-group-body').on('keydown', '.text-value-input', e => {
+	  	    if (e.keyCode === 13) {
+	  	    	textValue = $(e.target).val();
+	  	    	anchor = $(e.target.closest('.list-group-item')).attr('id-value')
+	  	        todolists[anchor].content = textValue;
+	  	    	$(e.target).prop(`outerHTML`, `<span class="text-value  border border-info p-2" href="#" role="button">${textValue}</span>`);
+	  	    }
+	    });
+
+	    $('.clear-save-todo').click( e => {
+	      sessionStorage.setItem("todoSaveornot", 0);
+	    });
+
+	    $('.save-all-todo').click( e => {
+	    	console.log(todolists);
+		  	$.ajax({
+			  'type': 'POST',
+			  'url': 'http://mentor-program.co/mtr04group1/BoisonChang/week12/todolists/api_save_todos.php',
+			  'data': { todolists }
+			}).done(function(data) {
+		  	  if (!data.ok) {
+		  	  	alert(data.message);
+		  	  	return;
+		  	  }
+		  	  console.log(data);
+ 			  sessionStorage.setItem("todoSaveornot", data.todoSaveornot);
+			})
+	    });
+
+		console.log(sessionStorage.getItem("todoSaveornot"));
+
+	    if(sessionStorage.getItem("todoSaveornot") == 1) {
+	    	var todoSaveornot = sessionStorage.getItem("todoSaveornot");
+		    $.ajax({
+		      url: `http://mentor-program.co/mtr04group1/BoisonChang/week12/todolists/api_output_save_todo.php?todoSaveornot=${todoSaveornot}`
+			}).done(function(data) {
+			  if(!data) {
+		        alert(data.message);
+				return;
+			  } 
+			let todos = data.todoRecord;
+		    for(let todo of todos) {
+			  todolists[idValue] = {
+	            'id': todo.todoid,
+	            'status': todo.status,
+	            'content': todo.content,
+	            'isdeleted': todo.isdeleted
+	  	      }
+	  	      idValue += 1;
+	  	      if(todo.isdeleted == 0) {
+			    if(todo.status === 'unfinshed') {
+			      todoDOM.append(`<li class="list-group-item  d-flex justify-content-between align-items-center
+				  	  " id-value="${todo.todoid}">
+						      <div class="list-badge d-flex align-items-center">
+				                <span class="badge badge-secondary badge-unfinished mr-3">未完成</span>
+						        <span class="text-value  border border-info p-2" href="#" role="button">${todo.content}</span>
+						      </div>
+						      <div>
+						  	    <button type="button" class="btn btn-success btn-finished">標記已完成</button>
+						  	    <button type="button" class="btn btn-danger delete-todo">刪除</button>
+						      </div></li>`);
+				} else if(todo.status === 'finshed') {
+			        todoDOM.append(`<li class="list-group-item  d-flex justify-content-between align-items-center
+				  	  " id-value="${todo.todoid}">
+						      <div class="list-badge d-flex align-items-center">
+				                <span class="badge badge-primary mr-3 badge-finished">已完成</span>
+						        <span class="text-value  border border-info p-2" href="#" role="button">${todo.content}</span>
+						      </div>
+						      <div>
+						  	    <button type="button" class="btn btn-warning btn-unfinished">標記未完成</button>
+						  	    <button type="button" class="btn btn-danger delete-todo">刪除</button>
+						      </div></li>`);  	
+			    }
+			  }		  
+			};	  
+		  })
+	    }
+
+
+
+	});
+  </script>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="#">TO DO LIST - Demo</a>
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+		  <li class="nav-item dropdown">
+		    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		      待辦事項狀態
+		    </a>
+		     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	           <a class="dropdown-item filter-finished" href="#">已完成事項</a>
+	           <a class="dropdown-item filter-unfinished" href="#">未完成事項</a>
+	           <a class="dropdown-item filter-all" href="#">全部事項</a>
+		     </div>
+		   </li>
+	    </ul>
+	  </div>
+	  <div>
+	  	<button type="button" class="btn btn-info mr-2 clear-save-todo">清除記錄</button>
+	  	<button type="button" class="btn btn-info mr-2 save-all-todo">儲存待辦清單</button>
+	</nav>
+
+	<div class="container">
+	  <div class="row mt-4">
+		<div class="col-12">
+		  <div class="alert alert-primary" role="alert">
+			這是我的 TO-DO-LIST 小作品
+		  </div>
+		</div>
+	  </div>
+	  <div class="row mt-4 input">
+	    <div class="col-12 col-md-8">
+		  <div class="form-group">
+		    <input placeholder="請輸入待辦事項" type="text" class="form-control todo-input" id="exampleInputPassword1">
+		  </div>
+		</div>
+	    <div class="col-12 col-md-4">
+	      <button class="btn btn-primary btn-block btn-add">新增</button>
+	    </div>
+	  </div>
+	  <ul class="list-group">
+	    <li class="list-group-item  d-flex justify-content-between align-items-center" aria-disabled="true">
+	      <div>
+	        失智者的待辦清單
+	      </div>
+	      <div>
+		    <button type="button" class="btn btn-light border-dark clear-finished">清空已完成</button>
+	      </div>
+	    </li>
+   	    <div class="list-group-body">
+	    </div>
+	  </ul>
+</body>
+
+<style>
+	.hide {
+	  display: none!important;
+	}
+
+	.save-all-todo {
+		text-decoration: none;
+		color: white;
+	}
+
+</style>
+</html>
