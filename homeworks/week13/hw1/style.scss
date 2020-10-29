@@ -1,0 +1,287 @@
+$btncolor: #737373;
+$black: #000000;
+$font-size-normal: 16px;
+$font-size-small: 14px;
+
+* {
+  box-sizing: border-box;
+}
+
+.navbar {
+  height: 80px;
+  &__site-name {
+    font-size: 28px;
+    font-weight: bold;
+    & a {
+      text-decoration: none;
+      color: #333333;
+    }
+  }
+  &__list {
+    display: flex;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    justify-content: space-between;
+    & li {
+      margin-left: 21px;
+    }
+    & a {
+      text-decoration: none;
+      color: #787878;
+      font-size: $font-size-normal;    
+    }
+    & > div {
+      display: flex;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0px 12px;
+}
+
+.banner {
+  background-image: linear-gradient(to top, $black, #434343);
+  height: 240px;
+  color: #eeeeee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &__wrapper > div {
+    margin-top: 26px;
+    text-align: center;
+  }
+  & h1 {
+    font-size: 28px;
+    margin: 0;
+  }
+}
+
+
+.container {
+  background: white;
+  padding: 6px;
+  display: inline-flex;
+  margin: 0 auto;
+  margin-top: -30px;
+  flex-direction: column;
+  &-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 138px;
+    min-height: calc(100vh - 350px);
+  }
+}
+
+
+.posts {
+  background: white;
+  padding: 6px;
+  display: inline-flex;
+  margin: 0 auto;
+  margin-top: -30px;
+  flex-direction: column;
+}
+
+.post {
+  width: 900px;
+  padding: 30px;
+  border: solid 1px #9a9a9a;
+  & + .post {
+    margin-top: 24px;
+  }
+  &__header {
+    font-size: $font-size-normal;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__action {
+    padding: 3px 12px;
+    border: solid 1px #a8a8a8;
+    color: #a8a8a8;
+    text-decoration: none;
+    font-size: $font-size-small;
+  }
+  &__info {
+    margin-top: 19px;
+    padding: 12px 22px;
+    background: #eee;
+  }
+  &__content {
+    margin-top: 17px;
+    white-space: pre-line;
+    line-height: 1.5em;
+  }
+}
+
+.btn-read-more {
+  display: inline-block;
+  padding: 12px 16px;
+  border: solid 1px $btncolor;
+  color: $btncolor;
+  margin-top: 36px;
+  text-decoration: none;
+}
+
+.login-wrapper {
+  margin: 0 auto;
+  border: solid 1px $black;
+  width: 527px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 62px 72px;
+  margin-top: -30px;
+  background: white;
+  & form {
+    width: 100%;
+  }
+  & input {
+    width: 100%;
+    &[type=submit] {
+      height: 56px;
+      background-image: linear-gradient(to top, $black, #434343);
+      color: white;
+      margin-top: 73px;
+    }
+    &[type=button] {
+      height: 56px;
+      background-image: linear-gradient(to top, $black, #434343);
+      color: white;
+      margin-top: 36px;
+    }
+  }
+  & h2 {
+    font-size: 32px;
+    font-weight: normal;
+  }
+  & h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+  }
+}
+
+.input {
+  &__field {
+    margin-top: 16px;
+    height: 40px;
+  }
+  &__wrapper + .input__wrapper {
+    margin-top: 23px;
+  }
+  &__label {
+    font-size: $font-size-small;
+    margin-left: 21px;
+  }
+}
+
+
+
+.edit-post {
+  width: 900px;
+  padding: 30px;
+  border: solid 1px #9a9a9a;
+  &__title {
+    font-size: 20px;
+  }
+  &__input-wrapper {
+    width: 100%;
+    margin-top: 28px;
+  }
+  &__btn {
+    display: inline-block;
+    padding: 10px 39px;
+    border: solid 1px $btncolor;
+    color: $btncolor;
+    cursor: pointer;
+    margin-top: 25px;
+    &-wrapper {
+      text-align: right;
+    }
+  }
+  &__input-wrapper {
+    & input, textarea {
+      width: 100%;
+      padding: 6px;
+    }
+  }
+}
+
+.admin-post {
+  padding: 24px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #9a9a9a;
+  font-size: $font-size-small;
+  width: 920px;
+  &__title {
+    font-size: $font-size-normal;
+    margin-left: 16px;
+    & a {
+      text-decoration: none; 
+    }
+  }
+  &__info {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+  }
+  &__created-at {
+    color: #8f8f8f;
+    margin-right: 12px;
+  }
+  &__btn {
+    padding: 4px 8px;
+    border: 1px solid #a8a8a8;
+    color: #a8a8a8;
+    cursor: pointer;
+    margin-left: 8px;
+    text-decoration: none;
+    &:last-child {
+      margin-right: 16px;
+    }
+  }
+}
+
+footer {
+  padding: 10px 0px;
+  background-color: #323232;
+  font-size: $font-size-small;
+  color: white;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.page__info {
+  text-align: center;
+}
+
+.paginator {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  & a {
+    border: 1px solid #5c9edc;
+    text-decoration: none;
+    color: #5c9edc;
+    padding: 5px;
+  }
+  & a ~ a {
+  margin-left: 5px;
+  }
+}
